@@ -9,25 +9,21 @@ success_symbol = "[❯](bold #9ccfd8)"
 [directory]
 truncation_length = 2
 truncation_symbol = "…/"
-repo_root_style = "bold #c4a7e7"
 repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
-style = "#c4a7e7"
 
 [git_branch]
 format = "on [$symbol$branch(:$remote_branch)]($style) "
-style = "italic #f6c177"
 
 [git_status]
-format     = '[$all_status]($style)'
-style      = "#eb6f92"
-ahead      = "⇡${count} "
-diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
-behind     = "⇣${count} "
+format = '[$all_status]($style)'
+ahead = "⇡${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+behind = "⇣${count} "
 conflicted = " "
 up_to_date = " "
-untracked  = "? "
-modified   = " "
-stashed    = ""
-staged     = ""
-renamed    = ""
-deleted    = ""
+untracked = "? "
+modified = " "
+stashed = ""
+staged = ""
+renamed = ""
+deleted = ""
