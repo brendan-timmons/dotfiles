@@ -1,0 +1,32 @@
+# Docker artifacts
+Dockerfile.dgit
+
+# Credential files
+.env
+.env.*
+*.key
+*.pem
+.git-ssh/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Vim swap files
+*.swp
+*.swo
+*.swn
+
+# Editor directories
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
