@@ -13,11 +13,13 @@ Clean dotfiles management using native GNU Stow with modular packages.
    cd ~/.dotfiles
    ```
 
-2. Install stow (if needed):
+2. Install applications:
 
    ```bash
    ./install.sh
    ```
+
+   Interactive installer - choose which apps to install (`stow`, `nvim`, `tmux`, ...) or type `all`.
 
 3. Remove existing configs:
 
