@@ -107,11 +107,15 @@ Use Docker for git operations with personal credentials (isolated from work mach
 # Build image (one-time)
 docker build -t dotfiles-git -f Dockerfile.dgit .
 
+GIT_PASS="$(echo "{encrypted_token}" | openssl enc -aes-256-cbc -a -d -salt -pbkdf2)"
+
 # Launch interactive shell with credentials
 docker run -it --rm \
   -v $(pwd):/dotfiles \
+  -e GIT_NAME="Your Name" \
+  -e GIT_EMAIL="your.email@example.com" \
   -e GIT_USERNAME=your_github_username \
-  -e GIT_TOKEN=your_personal_access_token \
+  -e GIT_TOKEN=$GIT_PASS \
   dotfiles-git
 ```
 

@@ -17,26 +17,6 @@ keymap.set("n", "<leader>sp", function()
   vim.fn.system("tmux split-window -v -b -c " .. current_directory)
 end, { desc = "Tmux split above" })
 
--- Telescope bindings (these partially overlap with LazyVim defaults)
--- LazyVim already sets:
---   <leader>ff for find_files
---   <leader>fg for live_grep
---   <leader><space> for buffers
--- We'll keep your custom ones for muscle memory
-
--- Note: These will be set up in lua/plugins/telescope.lua
--- Kept here for reference and can be uncommented if preferred:
--- keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
--- keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>", { desc = "Find git files" })
--- keymap.set("n", "<leader>ps", function()
---   require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
--- end, { desc = "Grep string" })
-
--- Harpoon keymaps will be configured in lua/plugins/harpoon.lua
-
--- Additional useful keymaps that complement LazyVim
--- (Optional - uncomment if desired)
-
 -- Window navigation (if you prefer Ctrl over LazyVim's defaults)
 -- keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
 -- keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })

@@ -1,16 +1,23 @@
 return {
   "nvim-telescope/telescope.nvim",
   keys = {
-    { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-    { "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
     {
-      "<leader>ps",
+      "<leader>pf",
       function()
-        require("telescope.builtin").grep_string({
-          search = vim.fn.input("Grep > "),
-        })
+        local action_state = require("telescope.actions.state")
+        local line = action_state.get_current_line()
+        LazyVim.pick("find_files", { no_ignore = true, default_text = line })()
       end,
-      desc = "Grep string",
+      desc = "Find files",
+    },
+    {
+      "<leader>fh",
+      function()
+        local action_state = require("telescope.actions.state")
+        local line = action_state.get_current_line()
+        LazyVim.pick("find_files", { no_ignore = true, default_text = line, hidden = true })()
+      end,
+      desc = "Find hidden files",
     },
   },
   opts = {
@@ -22,27 +29,6 @@ return {
         },
       },
       file_ignore_patterns = { "node_modules", ".git/" },
-      -- Add mappings for toggling hidden files
-      mappings = {
-        i = {
-          ["<C-h>"] = function(prompt_bufnr)
-            local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-            local opts = current_picker.finder.opts or {}
-            -- Toggle hidden
-            opts.hidden = not opts.hidden
-            -- Refresh the picker with new options
-            require("telescope.builtin").find_files(opts)
-          end,
-        },
-        n = {
-          ["H"] = function(prompt_bufnr)
-            local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-            local opts = current_picker.finder.opts or {}
-            opts.hidden = not opts.hidden
-            require("telescope.builtin").find_files(opts)
-          end,
-        },
-      },
     },
   },
 }
