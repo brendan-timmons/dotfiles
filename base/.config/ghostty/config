@@ -2,4 +2,5 @@ font-size = 18
 background = 1C1C1C 
 background-opacity = 0.94
 background-blur = true
-theme = "rose-pine"
+theme = "tokyonight"
+# theme = "rose-pine"

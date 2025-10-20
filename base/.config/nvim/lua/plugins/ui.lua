@@ -1,47 +1,48 @@
--- UI customizations: Rose Pine theme and transparent background
+-- UI customizations
+-- Change THEME to switch colorschemes
+
+local THEME = "tokyonight" -- Options: "tokyonight", "rose-pine"
 
 return {
-  -- Rose Pine colorscheme (matching your terminal theme!)
+  -- Tokyo Night
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    "folke/tokyonight.nvim",
+    enabled = THEME == "tokyonight",
     priority = 1000,
     opts = {
-      variant = "main", -- auto, main, moon, or dawn
-      dark_variant = "main",
+      style = "night", -- storm, moon, night, day
+      transparent = true,
       styles = {
-        transparency = true, -- Enable transparent background
+        sidebars = "transparent",
+        floats = "transparent",
       },
     },
   },
 
-  -- Configure LazyVim to use Rose Pine
+  -- Rose Pine
   {
-    "LazyVim/LazyVim",
+    "rose-pine/neovim",
+    name = "rose-pine",
+    enabled = THEME == "rose-pine",
+    priority = 1000,
     opts = {
-      colorscheme = "rose-pine",
+      variant = "main", -- auto, main, moon, dawn
+      dark_variant = "main",
+      styles = {
+        transparency = true,
+      },
     },
   },
 
-  -- Make background transparent (your custom ColorMyPencils function)
+  -- Configure LazyVim colorscheme
   {
-    "rose-pine/neovim",
-    config = function()
-      require("rose-pine").setup({
-        styles = {
-          transparency = true,
-        },
-      })
-
-      vim.cmd("colorscheme rose-pine")
-
-      -- Apply transparent background
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    end,
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = THEME,
+    },
   },
 
-  -- Configure bufferline to match Rose Pine
+  -- Bufferline
   {
     "akinsho/bufferline.nvim",
     opts = {
@@ -51,7 +52,6 @@ return {
     },
   },
 
-  -- Optional: Disable LazyVim's default colorscheme plugins
-  { "folke/tokyonight.nvim", enabled = false },
+  -- Disable unused colorschemes
   { "catppuccin/nvim", enabled = false },
 }
