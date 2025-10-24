@@ -17,6 +17,7 @@ return {
         "query",
         "rust",
         "terraform",
+        "hcl",
         "typescript",
         "vim",
         "vimdoc",

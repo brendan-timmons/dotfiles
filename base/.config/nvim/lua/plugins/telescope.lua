@@ -15,7 +15,7 @@ return {
       function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        LazyVim.pick("find_files", { no_ignore = true, default_text = line, hidden = true })()
+        LazyVim.pick("find_files", { no_ignore = false, default_text = line, hidden = true })()
       end,
       desc = "Find hidden files",
     },

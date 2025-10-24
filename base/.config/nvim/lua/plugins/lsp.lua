@@ -47,12 +47,7 @@ return {
         terraformls = {
           filetypes = { "terraform", "tf", "hcl" },
           root_dir = function(fname)
-            -- Don't attach to .tfvars files
-            if vim.fn.expand(fname):match("%.tfvars$") then
-              return nil
-            end
-            local lspconfig = require("lspconfig")
-            return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
+            return vim.fs.dirname(vim.fs.find(".git", { upward = true })[1])
           end,
         },
 
