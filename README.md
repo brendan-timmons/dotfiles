@@ -25,6 +25,13 @@ Clean dotfiles management using native GNU Stow with modular packages.
 
 3. Remove existing configs:
 
+   Backup existing if needed:
+   ```bash
+   cp ~/.zshrc ~/.zprofile ~/.tmux.conf ~/.config/nvim \
+   ~/.config/starship.toml ~/.config/ghostty \
+   archive_dir
+   ```
+
    ```bash
    rm ~/.zshrc ~/.zprofile ~/.tmux.conf
    rm -rf ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty

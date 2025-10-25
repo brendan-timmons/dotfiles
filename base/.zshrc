@@ -25,6 +25,9 @@ setopt INTERACTIVE_COMMENTS   # Allow comments in interactive shells
 # Docker completions
 FPATH="$HOME/.docker/completions:$FPATH"
 
+# Bun completions
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+
 # COMPLETIONS (cached, rebuilds once per day)
 # Force rebuild: rm -f ~/.zcompdump && compinit
 autoload -Uz compinit
