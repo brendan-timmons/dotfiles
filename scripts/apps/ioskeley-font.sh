@@ -74,7 +74,7 @@ ioskeley_font::install() {
     archive="${tmp_dir}/${IOSKELEY_FONT_ASSET}"
     extract_dir="${tmp_dir}/extract"
     font_list="${tmp_dir}/fonts.txt"
-    trap 'rm -rf "$tmp_dir"' EXIT
+    trap "rm -rf -- $(printf '%q' "$tmp_dir")" EXIT
 
     mkdir -p "$target_dir" "$extract_dir"
 
