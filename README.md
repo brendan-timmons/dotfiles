@@ -19,7 +19,9 @@ Clean dotfiles management using native GNU Stow with modular packages.
    ./install.sh
    ```
 
-   Interactive installer - choose which apps to install (`stow`, `nvim`, `tmux`, ...) or type `all`.
+   Interactive installer - choose which apps to install (`stow`, `nvim`, `tmux`, `ioskeley-font`, ...) or type `all`.
+
+   The Ghostty config uses `IoskeleyMonoTerm Nerd Font`. Install it directly with the `ioskeley-font` app, or select `ghostty` and the Ghostty installer will install the font after Ghostty. The font installer downloads `IoskeleyMono-Term-NerdFont.zip` from the latest `ahatem/IoskeleyMono` GitHub release and skips installation when the font is already present.
 
 3. Remove existing configs:
 
@@ -69,6 +71,8 @@ alias myalias="some command"
 
 The `.zshrc` sources this automatically if it exists.
 
+Keep company names, private repository paths, cloud account/profile details, and work-only aliases in `~/.extra`, not in tracked package files.
+
 ## How It Works
 
 Each package mirrors the structure of `~/`. When you `stow` a package, it creates symlinks in your home directory.
@@ -115,11 +119,18 @@ docker run -it --rm \
   -e GIT_NAME="Your Name" \
   -e GIT_EMAIL="your.email@example.com" \
   -e GIT_USERNAME=your_github_username \
-  -e GIT_TOKEN=$GIT_PASS \
+  -e GIT_TOKEN="$GIT_PASS" \
   dotfiles-git
 ```
 
 Generate GitHub PAT: Settings → Developer settings → Personal access tokens → Generate (with `repo` scope)
+
+The container marks `/dotfiles` as a Git safe directory so Git accepts the bind-mounted repo even when container and host user IDs differ.
+You can also pass one-off Git commands after the image name, for example:
+
+```bash
+docker run --rm -v "$PWD":/dotfiles dotfiles-git git status
+```
 
 ## Tips
 

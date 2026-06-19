@@ -1,0 +1,13 @@
+# Lightweight git container for isolated dotfiles management
+FROM alpine:latest
+
+RUN apk add --no-cache bash ca-certificates git
+
+COPY scripts/dgit-entrypoint.sh /usr/local/bin/dgit-entrypoint
+RUN chmod +x /usr/local/bin/dgit-entrypoint
+
+WORKDIR /dotfiles
+
+# Configure git user and credentials via environment variables.
+ENTRYPOINT ["/usr/local/bin/dgit-entrypoint"]
+CMD ["/bin/bash"]

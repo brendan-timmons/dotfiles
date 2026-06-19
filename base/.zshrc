@@ -22,9 +22,19 @@ setopt PUSHD_IGNORE_DUPS      # Don't push duplicates
 setopt PUSHD_SILENT           # Don't print directory stack
 setopt INTERACTIVE_COMMENTS   # Allow comments in interactive shells
 
-# COMPLETIONS
+# Docker completions
+FPATH="$HOME/.docker/completions:$FPATH"
+
+# COMPLETIONS (cached, rebuilds once per day)
+# Force rebuild: rm -f ~/.zcompdump && compinit
 autoload -Uz compinit
-compinit
+zcompdump_files=(~/.zcompdump(N.mh+24))
+if (( $#zcompdump_files )); then
+  compinit
+else
+  compinit -C
+fi
+unset zcompdump_files
 
 # Case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -46,6 +56,8 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 # Tenv auto install
 export TENV_AUTO_INSTALL=true
 
+# Prepend ~/.local/bin so user-installed binaries take precedence over version-manager shims.
+export PATH="$HOME/.local/bin:$PATH"
 # Custom scripts path
 export PATH="$HOME/.local/scripts:$PATH"
 
@@ -55,8 +67,9 @@ alias vim="nvim"
 # Aliases using eza for ls functionality
 alias ll='eza -lbhF --git --icons'
 alias lt='eza --tree --level=2 --icons'
+alias lla='eza -la'
 
-# lazygit alias
+#lazygit alias
 alias lg='lazygit'
 
 # ALIASES - Terraform/Terragrunt
@@ -83,6 +96,9 @@ bindkey '^[[B' history-beginning-search-forward
 [[ -f ~/.zsh/work.zsh ]] && source ~/.zsh/work.zsh
 [[ -f ~/.zsh/personal.zsh ]] && source ~/.zsh/personal.zsh
 
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # LOCAL OVERRIDES
-# Source ~/.extra for machine-specific/private settings
+# Source ~/.extra last so machine-specific/private settings can override defaults.
 [[ -f ~/.extra ]] && source ~/.extra

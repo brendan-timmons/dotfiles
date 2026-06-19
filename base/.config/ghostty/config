@@ -1,12 +1,19 @@
 # Font settings
-font-family = "JetBrainsMono Nerd Font"
+# Previous font: "JetBrainsMono Nerd Font"
+font-family = "IoskeleyMonoTerm Nerd Font"
 font-size = 16
 
 # Background settings
-background = 000000
-background-blur-radius = 0
+# Tokyo Night's default background was #1a1b26.
+# Pure black test. Keep this after the theme so it overrides Tokyo Night.
+# background = #1a1b26
+# background-blur-radius = 0
 
 # Theme
-theme = "iTerm2 Tango Dark"
+theme = "tokyonight"
+background = #000000
 
-keybind = shift+enter=text:\x1b\r
+# Keybindings
+# Previous Shift+Enter override. Disabled so TUIs like pi can receive Shift+Enter
+# and use it for multiline input. (Seems to work now in tools like claude code/codex)
+# keybind = shift+enter=text:\x1b\r

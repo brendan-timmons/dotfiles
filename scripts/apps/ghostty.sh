@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 ghostty::install() {
     local os_type
     os_type="$(uname -s)"
@@ -44,3 +46,4 @@ ghostty::install() {
 }
 
 ghostty::install
+bash "${SCRIPT_DIR}/ioskeley-font.sh"
