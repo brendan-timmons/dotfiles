@@ -86,6 +86,9 @@ alias tgp='terragrunt plan'
 alias cdroot='cd $(git rev-parse --show-toplevel)'
 
 # KEY BINDINGS
+# Keep standard shell navigation even when EDITOR/VISUAL selects a vi-style default.
+bindkey -e
+
 # Tmux sessionizer
 bindkey -s ^f "tmux-sessionizer\n"
 
