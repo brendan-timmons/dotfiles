@@ -110,35 +110,6 @@ All files are symlinked - changes anywhere are immediately reflected.
 4. Stow appropriate packages: `stow base <os> <context>`
 5. Done - all configs are live via symlinks, edit anywhere
 
-## Git Management (Isolated Credentials)
-
-Use Docker for git operations with personal credentials (isolated from work machine):
-
-```bash
-# Build image (one-time)
-docker build -t dotfiles-git -f Dockerfile.dgit .
-
-GIT_PASS="$(echo "{encrypted_token}" | openssl enc -aes-256-cbc -a -d -salt -pbkdf2)"
-
-# Launch interactive shell with credentials
-docker run -it --rm \
-  -v $(pwd):/dotfiles \
-  -e GIT_NAME="Your Name" \
-  -e GIT_EMAIL="your.email@example.com" \
-  -e GIT_USERNAME=your_github_username \
-  -e GIT_TOKEN="$GIT_PASS" \
-  dotfiles-git
-```
-
-Generate GitHub PAT: Settings → Developer settings → Personal access tokens → Generate (with `repo` scope)
-
-The container marks `/dotfiles` as a Git safe directory so Git accepts the bind-mounted repo even when container and host user IDs differ.
-You can also pass one-off Git commands after the image name, for example:
-
-```bash
-docker run --rm -v "$PWD":/dotfiles dotfiles-git git status
-```
-
 ## Tips
 
 - Start with just `stow base` to test
