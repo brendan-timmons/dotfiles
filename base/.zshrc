@@ -86,7 +86,9 @@ alias tgp='terragrunt plan'
 alias cdroot='cd $(git rev-parse --show-toplevel)'
 
 # KEY BINDINGS
-# Keep standard shell navigation even when EDITOR/VISUAL selects a vi-style default.
+# Force the emacs keymap. zsh picks vi mode automatically when $EDITOR or $VISUAL
+# contains the substring "vi" -- and "nvim" does. That broke ^A/^E (they became
+# self-insert) and made any ESC-prefixed key drop the line editor into vicmd.
 bindkey -e
 
 # Tmux sessionizer
@@ -95,6 +97,28 @@ bindkey -s ^f "tmux-sessionizer\n"
 # Better history search
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
+
+# Line start/end (emacs keymap gives ^A/^E for free; these cover Home/End too)
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
+# Word jumps. Multiple encodings so this works whether Option is sent as a
+# modifier (CSI 1;3) or as Meta (ESC-prefixed), in Ghostty and inside tmux.
+bindkey '^[[1;3D' backward-word      # Option+Left
+bindkey '^[[1;3C' forward-word       # Option+Right
+bindkey '^[[1;5D' backward-word      # Ctrl+Left
+bindkey '^[[1;5C' forward-word       # Ctrl+Right
+bindkey '^[^[[D'  backward-word      # ESC ESC [ D fallback
+bindkey '^[^[[C'  forward-word
+bindkey '^[b' backward-word          # Option+B
+bindkey '^[f' forward-word           # Option+F
+
+# Word deletion
+bindkey '^[^?' backward-kill-word    # Option+Backspace
+bindkey '^[[3;3~' kill-word          # Option+Delete
+bindkey '^W' backward-kill-word
 
 # SOURCE ENVIRONMENT-SPECIFIC CONFIGS
 [[ -f ~/.zsh/macos.zsh ]] && source ~/.zsh/macos.zsh

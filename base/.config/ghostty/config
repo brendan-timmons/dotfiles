@@ -17,3 +17,9 @@ background = #000000
 # Previous Shift+Enter override. Disabled so TUIs like pi can receive Shift+Enter
 # and use it for multiline input. (Seems to work now in tools like claude code/codex)
 # keybind = shift+enter=text:\x1b\r
+
+# Keyboard
+# Make the LEFT Option key send Alt/Meta so Option+arrow, Option+B/F and
+# Option+Backspace reach the shell as real word-motion keys. The RIGHT Option
+# key is left alone so it can still type composed characters (é, –, etc.).
+macos-option-as-alt = left
